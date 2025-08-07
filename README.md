@@ -81,7 +81,7 @@ MIT License © 2025 MD AL AMIN
 ## 👤 Author
 
 Developed with ❤️ by **MD AL AMIN | CMAA**  
-📫 Connect: [Coming soon]
+📫 Connect on [LinkedIn](https://www.linkedin.com/in/connectmdalamin)
 
 ---
 
