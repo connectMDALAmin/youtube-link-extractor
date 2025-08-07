@@ -223,6 +223,32 @@
       navigator.clipboard.writeText(output)
         .then(() => alert("Link copied to clipboard!"))
         .catch(() => alert("Failed to copy link."));
+
+      document.querySelector('.window-controls button[title="Close"]').addEventListener('click', function () {
+  alert("Nice try, but this isn't Windows. 😉");
+  
+  setTimeout(() => {
+    const messages = [
+      "Seriously, you're trying to close me?",
+      "I'm too young to die!",
+      "You can’t get rid of me that easily!",
+      "404: Close function not found.",
+      "Try Alt+F4 😜"
+    ];
+    
+    let i = 0;
+    const prankInterval = setInterval(() => {
+      if (i < messages.length) {
+        alert(messages[i]);
+        i++;
+      } else {
+        clearInterval(prankInterval);
+        alert("Okay okay, you win... but I'm still not closing 😎");
+      }
+    }, 800);
+  }, 500);
+});
+
     }
   </script>
 </body>
