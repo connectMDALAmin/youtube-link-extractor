@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>YouTube Link Generator</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background: #cfd8dc;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .app-window {
+      width: 600px;
+      margin: 60px auto;
+      background: #ffffff;
+      border: 1px solid #aaa;
+      border-radius: 6px;
+      box-shadow: 0 0 0 1px #999;
+      overflow: hidden;
+    }
+
+    .title-bar {
+      background: #2c3e50;
+      color: #ecf0f1;
+      padding: 10px 15px;
+      font-size: 16px;
+      font-weight: 600;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .title-bar .window-controls {
+      display: flex;
+      gap: 8px;
+    }
+
+    .window-controls button {
+      width: 12px;
+      height: 12px;
+      border: none;
+      border-radius: 50%;
+      background: #e74c3c;
+      cursor: pointer;
+    }
+
+    .window-controls button:nth-child(2) {
+      background: #f1c40f;
+    }
+
+    .window-controls button:nth-child(3) {
+      background: #2ecc71;
+    }
+
+    .content {
+      padding: 20px 30px;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #2c3e50;
+    }
+
+    label {
+      font-weight: bold;
+      display: block;
+      margin-bottom: 8px;
+      color: #34495e;
+    }
+
+    textarea {
+      width: 100%;
+      height: 80px;
+      padding: 10px;
+      font-size: 15px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      resize: vertical;
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 10px;
+      margin-top: 15px;
+    }
+
+    button {
+      flex: 1;
+      padding: 10px;
+      font-size: 15px;
+      border: none;
+      border-radius: 4px;
+      background: #0078d7;
+      color: #fff;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    button:hover {
+      background: #005a9e;
+    }
+
+    .output {
+      margin-top: 15px;
+      font-weight: bold;
+      background: #f4f4f4;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      word-break: break-word;
+      color: #2c3e50;
+    }
+
+    .tutorial {
+      margin-top: 30px;
+      background: #e3f2fd;
+      padding: 15px;
+      border-left: 4px solid #2196f3;
+      border-radius: 6px;
+    }
+
+    .tutorial h3 {
+      margin-top: 0;
+      color: #0d47a1;
+    }
+
+    .tutorial ol {
+      padding-left: 20px;
+    }
+
+    .tutorial img {
+      max-width: 100%;
+      border-radius: 6px;
+      margin-top: 10px;
+    }
+
+    .footer {
+      text-align: center;
+      font-size: 13px;
+      padding: 12px;
+      background: #f9f9f9;
+      color: #666;
+    }
+
+    @media screen and (max-width: 650px) {
+      .app-window {
+        width: 90%;
+        margin: 30px auto;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app-window">
+    <div class="title-bar">
+      <span>YouTube Link Generator</span>
+      <div class="window-controls">
+        <button title="Close"></button>
+        <button title="Minimize"></button>
+        <button title="Maximize"></button>
+      </div>
+    </div>
+
+    <div class="content">
+      <h2>YouTube Link Extractor</h2>
+
+      <label for="embedUrl">Paste YouTube Embed URL:</label>
+      <textarea id="embedUrl" placeholder="https://www.youtube-nocookie.com/embed/h1_0IOJppz0?autoplay=0&controls=0&disablekb=1&playsinline=1&cc_load_policy=0&cc_lang_pref=auto&widget_referrer=https%3A%2F%2Fbiddabari.com%2Fstudent%2Fcourse-contents%2F1130%2FCareer-With-UI-UX-Design-Live-Batch-3&rel=0&showinfo=0&iv_load_policy=3&modestbranding=1&customControls=true&noCookie=true&enablejsapi=1&origin=https%3A%2F%2Fbiddabari.com&widgetid=2&forigin=https%3A%2F%2Fbiddabari.com%2Fstudent%2Fcourse-contents%2F1130%2FCareer-With-UI-UX-Design-Live-Batch-3&aoriginsup=1&gporigin=https%3A%2F%2Fbiddabari.com%2Flogin&vf=1
+"></textarea>
+
+      <div class="btn-group">
+        <button onclick="extractLink()">Extract Link</button>
+        <button onclick="copyLink()">Copy to Clipboard</button>
+      </div>
+
+      <div class="output" id="outputLink">Your YouTube link will appear here.</div>
+
+      <div class="tutorial">
+        <h3>📘 How to Get the Embed URL</h3>
+        <ol>
+          <li>Open Dev Tools (Right-click → Inspect or <code>Ctrl+Shift+I</code>).</li>
+          <li>Play the Browser video you want to extract the link for 1-2 sec.</li>
+          <li>Go to the <strong>Network</strong> tab and filter by <strong>JS</strong>.</li>
+          <li>Find <code>www-embed-player.js</code> and click it.</li>
+          <li>Scroll to the <strong>Refer</strong> line and copy it.</li>
+          <li>Paste it into the box above and extract!</li>
+        </ol>
+        <img src="https://i.postimg.cc/SKTT7xN4/Screenshot-2025-08-07-144548.png" alt="Tutorial Screenshot">
+      </div>
+    </div>
+
+    <div class="footer">
+      Developed by MD AL AMIN | CMAA
+    </div>
+  </div>
+
+  <script>
+    function extractLink() {
+      const embedUrl = document.getElementById("embedUrl").value.trim();
+      const match = embedUrl.match(/\/embed\/([a-zA-Z0-9_-]{11})/);
+      const outputDiv = document.getElementById("outputLink");
+
+      if (match && match[1]) {
+        const videoId = match[1];
+        const youtubeLink = `https://www.youtube.com/watch?v=${videoId}`;
+        outputDiv.innerText = youtubeLink;
+      } else {
+        outputDiv.innerText = "Invalid embed URL.";
+      }
+    }
+
+    function copyLink() {
+      const output = document.getElementById("outputLink").innerText;
+      if (!output.startsWith("http")) return;
+      navigator.clipboard.writeText(output)
+        .then(() => alert("Link copied to clipboard!"))
+        .catch(() => alert("Failed to copy link."));
+    }
+  </script>
+</body>
+</html>
